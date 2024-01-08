@@ -22,7 +22,7 @@ namespace CleanArchitecture.Application.Shops.Commands.Delete
         public async Task<bool> Handle(DeleteShopCommand request, CancellationToken cancellationToken)
         {
             var shop = await _shopRepository.FindById(request.Id);
-            if (shop == null || shop.Products != null || shop.Sales != null)
+            if (shop == null || shop.Products.Any()  || shop.Sales.Any())
             {
                 return false;
             }
