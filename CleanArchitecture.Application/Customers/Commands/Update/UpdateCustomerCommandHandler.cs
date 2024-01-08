@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleanArchitecture.Domain.Common.Enums;
 using CleanArchitecture.Domain.Common.Exceptions;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Domain.Repositories;
@@ -6,8 +7,10 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CleanArchitecture.Application.Customers.Commands.Update
 {
@@ -28,15 +31,11 @@ namespace CleanArchitecture.Application.Customers.Commands.Update
             {
                 throw new NotFoundException("Customer Does Not Exist");
             }
-            customer = new Customer
-            {
-                Id = customer.Id,
-                Name = request.Name,
-                Address = request.Address,
-                Password = request.Password,
-                PhoneNumber = request.PhoneNumber,
-                Role = request.Role,
-            };
+            customer.Name = request.Name ?? customer.Name;
+            customer.Address = request.Address ?? customer.Address;
+            customer.Password = request.Password ?? customer.Password;
+            customer.PhoneNumber = request.PhoneNumber ?? customer.PhoneNumber;
+            customer.Role = request.Role;
             _customerRepository.Update(customer);
             await _customerRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return customer.MapToCustomerDto(_mapper);

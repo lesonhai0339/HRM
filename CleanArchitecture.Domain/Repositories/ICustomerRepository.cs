@@ -10,9 +10,6 @@ namespace CleanArchitecture.Domain.Repositories
     public interface ICustomerRepository: IEFRepository<Customer, Customer>
     {
         Task<List<Customer>> FindAll(CancellationToken cancellationToken = default);
-        Task<Customer> FindById(Guid Id, CancellationToken cancellationToken = default);
-        //void AddCustomer(Customer customer);
-        //void UpdateCustomer(Customer customer);
-        //void DeleteCustomer(Customer customer);
+        Task<Customer?> FindById(Guid Id, CancellationToken cancellationToken = default);
     }
 }

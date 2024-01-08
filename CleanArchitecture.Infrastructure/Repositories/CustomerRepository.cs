@@ -19,9 +19,9 @@ namespace CleanArchitecture.Infrastructure.Repositories
         {
             return await FindAllAsync(cancellationToken);
         }
-        public async Task<Customer> FindById(Guid Id, CancellationToken cancellationToken = default)
+        public async Task<Customer?> FindById(Guid Id, CancellationToken cancellationToken = default)
         {
-            return await FindById(Id, cancellationToken);
+            return await FindAsync(x=> x.Id == Id, cancellationToken);
         }
         //public void AddCustomer(Customer customer)
         //{
