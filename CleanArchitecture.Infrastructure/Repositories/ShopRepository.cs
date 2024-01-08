@@ -15,5 +15,10 @@ namespace CleanArchitecture.Infrastructure.Repositories
         public ShopRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
+
+        public async Task<Shop?> FindById(Guid Id, CancellationToken cancellationToken = default)
+        {
+            return await FindAsync(x => x.Id == Id, cancellationToken);
+        }
     }
 }

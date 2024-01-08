@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Shop\**" />
+    <EmbeddedResource Remove="Shop\**" />
+    <None Remove="Shop\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation" Version="11.9.0" />
@@ -31,8 +37,6 @@
     <Folder Include="Orders\DeleteOrder\" />
     <Folder Include="Orders\GetOrders\" />
     <Folder Include="Orders\UpdateOrder\" />
-    <Folder Include="Shop\Commands\" />
-    <Folder Include="Shop\Querys\" />
     <Folder Include="Vendor\Commands\" />
     <Folder Include="Vendor\Querys\" />
   </ItemGroup>
