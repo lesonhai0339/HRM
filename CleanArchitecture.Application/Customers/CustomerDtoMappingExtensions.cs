@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CleanArchitecture.Application.Orders;
 using CleanArchitecture.Domain.Entities;
 using System;
 using System.Collections.Generic;

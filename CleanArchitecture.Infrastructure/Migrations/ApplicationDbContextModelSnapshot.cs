@@ -60,20 +60,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -195,46 +181,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Vendors");
-                });
-
-            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
-                {
-                    b.OwnsMany("CleanArchitecture.Domain.Entities.OrderDetail", "OrderDetails", b1 =>
-                        {
-                            b1.Property<Guid>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<Guid>("OrderId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<Guid>("ProductId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<int>("Quantity")
-                                .HasColumnType("int");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("OrderId");
-
-                            b1.HasIndex("ProductId");
-
-                            b1.ToTable("OrderDetail");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-
-                            b1.HasOne("CleanArchitecture.Domain.Entities.Product", "Product")
-                                .WithMany()
-                                .HasForeignKey("ProductId")
-                                .OnDelete(DeleteBehavior.Restrict)
-                                .IsRequired();
-
-                            b1.Navigation("Product");
-                        });
-
-                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Product", b =>

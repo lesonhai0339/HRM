@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.Common.Mappings;
-using CleanArchitecture.Application.Orders;
 using CleanArchitecture.Domain.Common.Enums;
 using CleanArchitecture.Domain.Entities;
 using System;

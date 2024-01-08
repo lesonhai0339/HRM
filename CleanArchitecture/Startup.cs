@@ -3,7 +3,7 @@ using CleanArchitecture.Configuration;
 using CleanArchitecture.Filters;
 using Serilog;
 using CleanArchitecture.Api.Configuration;
-using CleanArchitecture.Application.Orders;
+using CleanArchitecture.Application;
 
 namespace CleanArchitecture.Api
 {

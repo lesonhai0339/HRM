@@ -28,9 +28,6 @@
     <Folder Include="Product\Querys\" />
     <Folder Include="Sale\Commands\" />
     <Folder Include="Sale\Querys\" />
-    <Folder Include="Orders\DeleteOrder\" />
-    <Folder Include="Orders\GetOrders\" />
-    <Folder Include="Orders\UpdateOrder\" />
     <Folder Include="Shop\Commands\" />
     <Folder Include="Shop\Querys\" />
     <Folder Include="Vendor\Commands\" />

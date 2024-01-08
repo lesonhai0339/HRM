@@ -15,8 +15,6 @@ namespace CleanArchitecture.Infrastructure.Persistence
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-
-        public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
 
         public DbSet<Customer> Customers { get; set; }
@@ -29,7 +27,6 @@ namespace CleanArchitecture.Infrastructure.Persistence
             base.OnModelCreating(modelBuilder);
 
             ConfigureModel(modelBuilder);
-            modelBuilder.ApplyConfiguration(new OrderConfiguration());
 
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());

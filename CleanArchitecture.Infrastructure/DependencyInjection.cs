@@ -24,7 +24,6 @@ namespace CleanArchitecture.Infrastructure
                 options.UseLazyLoadingProxies();
             });
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
-            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<ICustomerRepository, CustomerRepository>();

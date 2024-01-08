@@ -1,12 +1,12 @@
 ﻿using Asp.Versioning.ApiExplorer;
 using CleanArchitecture.Api.Filters;
-using CleanArchitecture.Application.Orders;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
+using CleanArchitecture.Infrastructure;
 
 namespace CleanArchitecture.Api.Configuration
 {

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace CleanArchitecture.Application.Orders
+namespace CleanArchitecture.Application
 {
     public static class DependencyInjection
     {
@@ -20,7 +20,6 @@ namespace CleanArchitecture.Application.Orders
                 cfg.AddOpenBehavior(typeof(AuthorizationBehaviour<,>));
                 cfg.AddOpenBehavior(typeof(ValidationBehaviour<,>));
                 cfg.AddOpenBehavior(typeof(UnitOfWorkBehaviour<,>));
-
             });
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IValidatorProvider, ValidatorProvider>();
