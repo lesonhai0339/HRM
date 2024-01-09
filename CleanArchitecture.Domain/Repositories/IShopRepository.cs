@@ -9,5 +9,6 @@ namespace CleanArchitecture.Domain.Repositories
 {
     public interface IShopRepository: IEFRepository<Shop, Shop>
     {
+        Task<Shop?> FindById(Guid Id, CancellationToken cancellationToken = default);
     }
 }

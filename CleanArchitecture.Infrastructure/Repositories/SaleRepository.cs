@@ -15,5 +15,14 @@ namespace CleanArchitecture.Infrastructure.Repositories
         public SaleRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
+        public async Task<Sale?> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await FindAsync(x => x.Id == id, cancellationToken);
+        }
+
+        public async Task<List<Sale>> FindByIdsAsync(Guid[] ids, CancellationToken cancellationToken = default)
+        {
+            return await FindAllAsync(x => ids.Contains(x.Id), cancellationToken);
+        }
     }
 }
