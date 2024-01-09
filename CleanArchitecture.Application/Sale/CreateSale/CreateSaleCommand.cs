@@ -1,10 +1,11 @@
 ﻿using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Application.Sale;
 using MediatR;
 using System;
 
 namespace CleanArchitecture.Application.Sales.CreateSale
 {
-    public class CreateSaleCommand : IRequest<Guid>, ICommand
+    public class CreateSaleCommand : IRequest<SaleDto>, ICommand
     {
         public CreateSaleCommand(Guid id, decimal sumtotal, Guid customerId, Guid vendorId, Guid shopId, Guid productId)
         {

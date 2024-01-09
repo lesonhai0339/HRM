@@ -26,17 +26,17 @@ namespace CleanArchitecture.Api.Controllers
 
         [HttpPost("sales")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<Guid>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<SaleDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<Guid>>> CreateSale(
+        public async Task<ActionResult<JsonResponse<SaleDto>>> CreateSale(
             [FromBody] CreateSaleCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(Created), new JsonResponse<Guid>(result));
+            return Ok(result) ;
         }
 
         [HttpGet("sales/{customerId}")]
@@ -76,7 +76,7 @@ namespace CleanArchitecture.Api.Controllers
             }
 
             await _mediator.Send(command, cancellationToken);
-            return NoContent();
+            return Ok("sucess");
         }
 
         [HttpDelete("sales/{saleId}")]
@@ -90,7 +90,7 @@ namespace CleanArchitecture.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             await _mediator.Send(new DeleteSaleCommand(saleId), cancellationToken);
-            return Ok();
+            return Ok("success");
         }
     }
 }
