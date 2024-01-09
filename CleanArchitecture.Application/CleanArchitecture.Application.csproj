@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Sale\Commands\**" />
+    <Compile Remove="Sale\Querys\**" />
     <Compile Remove="Shop\**" />
+    <EmbeddedResource Remove="Sale\Commands\**" />
+    <EmbeddedResource Remove="Sale\Querys\**" />
     <EmbeddedResource Remove="Shop\**" />
+    <None Remove="Sale\Commands\**" />
+    <None Remove="Sale\Querys\**" />
     <None Remove="Shop\**" />
   </ItemGroup>
 
@@ -32,8 +38,6 @@
   <ItemGroup>
     <Folder Include="Product\Commands\" />
     <Folder Include="Product\Querys\" />
-    <Folder Include="Sale\Commands\" />
-    <Folder Include="Sale\Querys\" />
     <Folder Include="Orders\DeleteOrder\" />
     <Folder Include="Orders\GetOrders\" />
     <Folder Include="Orders\UpdateOrder\" />
