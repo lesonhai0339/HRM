@@ -2,7 +2,9 @@
 using CleanArchitecture.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace CleanArchitecture.Configuration
 {
@@ -15,20 +17,38 @@ namespace CleanArchitecture.Configuration
             services.AddTransient<ICurrentUserService, CurrentUserService>();
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
             services.AddHttpContextAccessor();
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(option =>
+            {
+                option.SaveToken = true;
+                option.RequireHttpsMetadata = false;
+                //JwtBearer
+                option.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    RequireExpirationTime = true,
+                    ValidIssuer = configuration["Security.Bearer:Authority"],
+                    ValidAudience = configuration["Security.Bearer:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("HRMSecretKeyLogInToken"))
+                };
+            });
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(
+            //        JwtBearerDefaults.AuthenticationScheme,
+            //        options =>
+            //        {
+            //            options.Authority = configuration.GetSection("Security.Bearer:Authority").Get<string>();
+            //            options.Audience = configuration.GetSection("Security.Bearer:Audience").Get<string>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(
-                    JwtBearerDefaults.AuthenticationScheme,
-                    options =>
-                    {
-                        options.Authority = configuration.GetSection("Security.Bearer:Authority").Get<string>();
-                        options.Audience = configuration.GetSection("Security.Bearer:Audience").Get<string>();
-
-                        options.TokenValidationParameters.RoleClaimType = "role";
-                        options.SaveToken = true;
-                    });
-
+            //            options.TokenValidationParameters.RoleClaimType = "role";
+            //        });
             services.AddAuthorization(ConfigureAuthorization);
+
 
             return services;
         }
@@ -37,8 +57,8 @@ namespace CleanArchitecture.Configuration
         private static void ConfigureAuthorization(AuthorizationOptions options)
         {
             //Configure policies and other authorization options here. For example:
-            //options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("role", "employee"));
-            //options.AddPolicy("AdminOnly", policy => policy.RequireClaim("role", "admin"));
+            options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("role", "employee"));
+            options.AddPolicy("AdminOnly", policy => policy.RequireClaim("role", "admin"));
         }
     }
 }

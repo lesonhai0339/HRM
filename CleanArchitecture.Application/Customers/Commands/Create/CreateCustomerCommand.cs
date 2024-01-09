@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Customers.Commands.Create
 {
-    public class CreateCustomerCommand: IRequest<CusTomerDto>
+    public class CreateCustomerCommand: IRequest<CusTomerDto>, ICommand
     {
         public CreateCustomerCommand(string Name, string PhoneNumber, string Address, string Password)
         {

@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Domain.Common.Enums;
+﻿using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Domain.Common.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Customers.Commands.Update
 {
-    public class UpdateCustomerCommand: IRequest<CusTomerDto>
+    public class UpdateCustomerCommand: IRequest<CusTomerDto>, ICommand
     {
         public UpdateCustomerCommand(Guid id, string Name, string PhoneNumber, string Address, string Password)
         {

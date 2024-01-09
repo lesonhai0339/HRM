@@ -11,5 +11,6 @@ namespace CleanArchitecture.Domain.Repositories
     {
         Task<List<Customer>> FindAll(CancellationToken cancellationToken = default);
         Task<Customer?> FindById(Guid Id, CancellationToken cancellationToken = default);
+        Task<Customer?> FindByName(string Name, string password, CancellationToken cancellationToken = default);
     }
 }

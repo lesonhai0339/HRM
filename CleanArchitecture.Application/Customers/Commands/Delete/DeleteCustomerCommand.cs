@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using CleanArchitecture.Application.Common.Interfaces;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Customers.Commands.Delete
 {
-    public class DeleteCustomerCommand: IRequest<bool>
+    public class DeleteCustomerCommand: IRequest<bool>, ICommand
     {
         public DeleteCustomerCommand(Guid id) 
         {

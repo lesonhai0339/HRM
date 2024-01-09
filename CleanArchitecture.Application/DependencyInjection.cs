@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Application.Common.Behaviours;
+using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Application.Common.Validation;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;

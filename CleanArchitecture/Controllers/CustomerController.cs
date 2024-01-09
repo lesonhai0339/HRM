@@ -2,6 +2,7 @@
 using CleanArchitecture.Application.Customers;
 using CleanArchitecture.Application.Customers.Commands.Create;
 using CleanArchitecture.Application.Customers.Commands.Delete;
+using CleanArchitecture.Application.Customers.Commands.Login;
 using CleanArchitecture.Application.Customers.Commands.Update;
 using CleanArchitecture.Application.Customers.Querys.GetAll;
 using CleanArchitecture.Application.Customers.Querys.GetById;
@@ -20,6 +21,19 @@ namespace CleanArchitecture.Api.Controllers
         public CustomerController(ISender mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        }
+        [HttpPost("customer/login")]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<string>> LoginCustomer(
+            [FromBody] LoginCustomerCommand command,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(command, cancellationToken);
+            return result;
         }
         [HttpPost("customer/create")]
         [ProducesResponseType(typeof(JsonResponse<CusTomerDto>), StatusCodes.Status201Created)]

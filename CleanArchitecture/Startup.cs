@@ -4,6 +4,8 @@ using CleanArchitecture.Filters;
 using Serilog;
 using CleanArchitecture.Api.Configuration;
 using CleanArchitecture.Application;
+using CleanArchitecture.Api.Services;
+using CleanArchitecture.Application.Common.Interfaces;
 
 namespace CleanArchitecture.Api
 {
@@ -18,6 +20,7 @@ namespace CleanArchitecture.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ILoginService, LoginService>();
             services.AddControllers(
                 opt =>
                 {
