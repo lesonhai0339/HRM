@@ -23,6 +23,7 @@ namespace CleanArchitecture.Api.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
         [HttpPost("customer/login")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -33,7 +34,7 @@ namespace CleanArchitecture.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return result;
+            return Ok(new JsonResponse<string>(result));
         }
         [HttpPost("customer/create")]
         [ProducesResponseType(typeof(JsonResponse<CusTomerDto>), StatusCodes.Status201Created)]
@@ -61,6 +62,7 @@ namespace CleanArchitecture.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return result;
         }
+        [Microsoft.AspNetCore.Authorization.Authorize(Policy = "AdminOnly")]
         [HttpPost("customer/delete")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -97,7 +99,7 @@ namespace CleanArchitecture.Api.Controllers
            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllCusTomerQuery(), cancellationToken);
-            return result;
+            return Ok(new JsonResponse<List<CusTomerDto>>(result));
         }
     }
 }

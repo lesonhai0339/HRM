@@ -11,16 +11,14 @@ namespace CleanArchitecture.Application.Customers.Commands.Update
 {
     public class UpdateCustomerCommand: IRequest<CusTomerDto>, ICommand
     {
-        public UpdateCustomerCommand(Guid id, string Name, string PhoneNumber, string Address, string Password)
+        public UpdateCustomerCommand(Guid id, string PhoneNumber, string Address, string Password)
         {
             this.Id = id;
-            this.Name = Name;
             this.PhoneNumber = PhoneNumber;
             this.Address = Address;
             this.Password = Password;
         }
         public Guid Id { get; set; }
-        public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string Password { get; set; }

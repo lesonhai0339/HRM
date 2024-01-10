@@ -23,9 +23,13 @@ namespace CleanArchitecture.Infrastructure.Repositories
         {
             return await FindAsync(x=> x.Id == Id, cancellationToken);
         }
-        public async Task<Customer?> FindByName(string Name,string password, CancellationToken cancellationToken = default)
+        public async Task<Customer?> Login(string Name,string password, CancellationToken cancellationToken = default)
         {
             return await FindAsync(x => x.Name.Equals(Name) && x.Password.Equals(password), cancellationToken);
+        }
+        public async Task<Customer?> FindByName(string Name, CancellationToken cancellationToken = default)
+        {
+            return await FindAsync(x => x.Name.Equals(Name), cancellationToken);
         }
     }
 }

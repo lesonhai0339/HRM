@@ -21,7 +21,7 @@ namespace CleanArchitecture.Application.Customers.Commands.Delete
             var customer = await _customerRepository.FindById(request.Id);
             if(customer == null)
             {
-                return false;
+                throw new NotFoundException("User Does Not Exits");
             }
             _customerRepository.Remove(customer);
             await _customerRepository.UnitOfWork.SaveChangesAsync();

@@ -12,8 +12,6 @@ namespace CleanArchitecture.Application.Customers.Commands.Update
     {
         public UpdateCustomerCommandValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is Required")
-                .MaximumLength(200).WithMessage("Maximum 200 Characters.");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password is Required")
                 .MinimumLength(6).WithMessage("At Least 6 Characters")
                 .MaximumLength(50).WithMessage("Maximun 50 Characters");

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleanArchitecture.Application.Common.Security;
 using CleanArchitecture.Domain.Common.Enums;
 using CleanArchitecture.Domain.Common.Exceptions;
 using CleanArchitecture.Domain.Entities;
@@ -18,10 +19,12 @@ namespace CleanArchitecture.Application.Customers.Commands.Update
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IMapper _mapper;
-        public UpdateCustomerCommandHandler(ICustomerRepository customerRepository, IMapper mapper)
+        private readonly IEncryptionService _encryption;
+        public UpdateCustomerCommandHandler(ICustomerRepository customerRepository, IMapper mapper,IEncryptionService encryption)
         {
             _customerRepository = customerRepository;
             _mapper = mapper;
+            _encryption = encryption;
         }
 
         public async Task<CusTomerDto> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
@@ -31,9 +34,8 @@ namespace CleanArchitecture.Application.Customers.Commands.Update
             {
                 throw new NotFoundException("Customer Does Not Exist");
             }
-            customer.Name = request.Name ?? customer.Name;
             customer.Address = request.Address ?? customer.Address;
-            customer.Password = request.Password ?? customer.Password;
+            customer.Password = BCrypt.Net.BCrypt.HashPassword(request.Password, BCrypt.Net.SaltRevision.Revision2) ?? customer.Password;
             customer.PhoneNumber = request.PhoneNumber ?? customer.PhoneNumber;
             customer.Role = request.Role;
             _customerRepository.Update(customer);

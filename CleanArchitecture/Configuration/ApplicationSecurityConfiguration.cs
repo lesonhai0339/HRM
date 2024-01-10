@@ -34,7 +34,7 @@ namespace CleanArchitecture.Configuration
                     RequireExpirationTime = true,
                     ValidIssuer = configuration["Security.Bearer:Authority"],
                     ValidAudience = configuration["Security.Bearer:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("HRMSecretKeyLogInToken"))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Security.Bearer:Secret"]!))
                 };
             });
             //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -57,8 +57,9 @@ namespace CleanArchitecture.Configuration
         private static void ConfigureAuthorization(AuthorizationOptions options)
         {
             //Configure policies and other authorization options here. For example:
-            options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("role", "employee"));
-            options.AddPolicy("AdminOnly", policy => policy.RequireClaim("role", "admin"));
+            options.AddPolicy("CustomerOnly", policy => policy.RequireClaim("role", "Customer"));
+            options.AddPolicy("AdminOnly", policy => policy.RequireClaim("role", "Admin"));
+            options.AddPolicy("VendorOnly", policy => policy.RequireClaim("role", "Vendor"));
         }
     }
 }
