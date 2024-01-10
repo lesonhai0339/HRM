@@ -41,8 +41,6 @@
     <Folder Include="Orders\DeleteOrder\" />
     <Folder Include="Orders\GetOrders\" />
     <Folder Include="Orders\UpdateOrder\" />
-    <Folder Include="Vendor\Commands\" />
-    <Folder Include="Vendor\Querys\" />
   </ItemGroup>
 
 </Project>

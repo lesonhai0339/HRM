@@ -15,5 +15,15 @@ namespace CleanArchitecture.Infrastructure.Repositories
         public VendorRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
+
+        public async Task<Vendor?> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await FindAsync(x => x.Id.Equals(id), cancellationToken);
+        }
+
+        public async Task<List<Vendor>> FindByIdsAsync(Guid[] ids, CancellationToken cancellationToken = default)
+        {
+            return await FindAllAsync(x => ids.Contains(x.Id), cancellationToken);
+        }
     }
 }
